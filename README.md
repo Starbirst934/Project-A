@@ -1,2 +1,3 @@
-# A-project
-Following the get started articles on git hub.
+# Project
+For getting started on GitHub.
+Most work will be stored here.
