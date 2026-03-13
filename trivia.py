@@ -27,7 +27,7 @@ elif (answer2 == "Peregrine falcon"):
 else:
     print(answer2 + " is incorrect!")
 print("Last question!")
-answer3 =input("Is an arachnid an insect? Yes or no?")
+answer3 = input("Is an arachnid an insect? Yes or no?")
 if (answer3 == "no"):
     print(answer3 + " is correct!")
 
