@@ -45,7 +45,7 @@ def show_manual():
 while True:
     try:
         choice = int(input("\nEnter the number of your choice of operation (1 = addition, 2 = subtraction, etc.): ").strip())  
-    except (ValueError, NameError):
+    except (ValueError):
         print("Please enter a whole number from 1-10")
         continue
     if choice < 1:
