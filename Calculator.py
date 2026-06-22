@@ -14,7 +14,7 @@ print("8. Squaring")
 print("9. Manual")
 print("10. Calculation history")
 
-print("Use the manual to learn what all the operations are!")
+print("Use the manual to learn what all the operations do!")
 def input_from_user():
     numbers = []
     while True:
@@ -22,7 +22,7 @@ def input_from_user():
             numbers.insert(0, float(input("Enter the first number you want to use for the calculation: ")))
             numbers.insert(1, float(input("Enter the second number you want to use for the calculation: ")))
             return numbers
-        except ValueError:
+        except (ValueError,SyntaxError,RuntimeError,TypeError):
             print("Please enter valid numbers like 3 or 4.5.")
 
 def show_history():
@@ -44,8 +44,14 @@ def show_manual():
 
 while True:
     try:
-        choice = int(input("\nEnter the number of your choice of operation (1 = addition, 2 = subtraction, etc.): ").strip())
-    except ValueError:
+        choice = int(input("\nEnter the number of your choice of operation (1 = addition, 2 = subtraction, etc.): ").strip())  
+    except (ValueError, NameError):
+        print("Please enter a whole number from 1-10")
+        continue
+    if choice < 1:
+        print("Please enter a whole number from 1-10")
+        continue
+    if choice > 10:
         print("Please enter a whole number from 1-10")
         continue
     if choice == 1:#addition
