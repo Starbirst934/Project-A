@@ -13,15 +13,15 @@ print("7. Exponentiation")
 print("8. Squaring")
 print("9. Manual")
 print("10. Calculation history")
-
+print("11. Exit")
 print("Use the manual to learn what all the operations do!")
 def input_from_user():
-    numbers = []
+    number = []
     while True:
         try:
-            numbers.insert(0, float(input("Enter the first number you want to use for the calculation: ")))
-            numbers.insert(1, float(input("Enter the second number you want to use for the calculation: ")))
-            return numbers
+            number.insert(0, float(input("Enter the first number you want to use for the calculation: ")))
+            number.insert(1, float(input("Enter the second number you want to use for the calculation: ")))
+            return number
         except (ValueError,SyntaxError,RuntimeError,TypeError):
             print("Please enter valid numbers like 3 or 4.5.")
 
@@ -44,15 +44,15 @@ def show_manual():
 
 while True:
     try:
-        choice = int(input("\nEnter the number of your choice of operation (1 = addition, 2 = subtraction, etc.): ").strip())  
+        choice = int(input("\nEnter the number of your choice of operation or exit using '11'.(1 = addition, 2 = subtraction, etc.): ").strip())  
     except (ValueError):
-        print("Please enter a whole number from 1-10")
+        print("Please enter a whole number from 1-11.")
         continue
     if choice < 1:
-        print("Please enter a whole number from 1-10")
+        print("Please enter a whole number from 1-11.")
         continue
-    if choice > 10:
-        print("Please enter a whole number from 1-10")
+    if choice > 11:
+        print("Please enter a whole number from 1-11.")
         continue
     if choice == 1:#addition
 
@@ -83,7 +83,7 @@ while True:
         while True:
             num2 = float(input("Enter the second number you want to use for the calculation:"))
             if num2 == 0:
-                print("You can't divide by zero")
+                print("You can't divide by zero.")
                 continue
             break
         result4 = num1 / num2
@@ -94,35 +94,38 @@ while True:
         while True:
             num2 = float(input("Enter the second number you want to use for the calculation:"))
             if num2 == 0:
-                print("You can't divide by zero")
+                print("You can't divide by zero.")
                 continue
             break
         result5 = num1 % num2
         history.append(f"{num1} % {num2} = {result5}")
         print(num1,"%", num2, "=" ,result5)
-    elif choice == 6:
+    elif choice == 6: #special  operation
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         num2 = float(input("Enter the second number you want to use for the calculation:"))
         result6 = (num1 + num2) * num2
         history.append(f"{num1} + {num2} * {num2} = {result6}")
         print(num1,"+", num2, "x", num2, "=" ,result6)
-    elif choice == 7:
+    elif choice == 7: #Exponentiation
         num1 = float(input("Enter the base number you want to use for the calculation:"))
         num2 = float(input("Enter the exponent you want to use for the calculation:"))
         result7 = num1 ** num2
         print(num1,"**", num2, "=" ,result7)
-    elif choice == 8:
+    elif choice == 8: #squaring
         num1 = float(input("Enter the value you want to square:"))
         result8 = num1 ** 2.0
         history.append(f"{num1} ** 2.0 = {result8}")
         print(num1, "**", 2.0, "=", result8)
-    elif choice == 9:
+    elif choice == 9: #manual
         show_manual()
         continue
-    elif choice == 10:
+    elif choice == 10: #Calculation history
+        print("Here are your previous calculation(s):")
         show_history()
         continue
-    
+    elif choice == 11: #exit
+        print("Thank you for using my calculator!")
+        break
     if not asked_once:
         play = input("Would you like to use the calculator again? (y/n)").strip().lower()
         asked_once = True
