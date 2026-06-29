@@ -22,7 +22,7 @@ def input_from_user():
             number.insert(0, float(input("Enter the first number you want to use for the calculation: ")))
             number.insert(1, float(input("Enter the second number you want to use for the calculation: ")))
             return number
-        except (ValueError,SyntaxError,RuntimeError,TypeError):
+        except(ValueError,SyntaxError,RuntimeError,TypeError):
             print("Please enter valid numbers like 3 or 4.5.")
 
 def show_history():
@@ -44,8 +44,8 @@ def show_manual():
 
 while True:
     try:
-        choice = int(input("\nEnter the number of your choice of operation or exit using '11'.(1 = addition, 2 = subtraction, etc.): ").strip())  
-    except (ValueError):
+        choice = int(input("\nEnter the number of your choice of operation or exit using '11'.(1 = addition, 2 = subtraction, etc.): ").strip())
+    except(ValueError):
         print("Please enter a whole number from 1-11.")
         continue
     if choice < 1:
@@ -60,24 +60,32 @@ while True:
         #num2 = int(input("Enter the second number you want to use for the calculation:"))
         #result1 = num1 + num2
         #print(num1, "+", num2, "=", result1)
-     
+
         numbers = input_from_user()
         result1 = numbers[0] + numbers[1]
         history.append(f"{numbers[0]} + {numbers[1]} = {result1}")
         print(numbers[0], "+", numbers[1], "=", result1)
-    
+        previous = result1
+
     elif choice == 2:#subtraction
         num1 = float(input("Enter the first number you want to use for the calculation:"))
+        try:
+            if num1 == 0:
+                num1 = previous
+        except(TypeError, SyntaxError, ValueError):
+            print("You have no previous answer! Complete a calculation first to be able to enter your previous answer.")
         num2 = float(input("Enter the second number you want to use for the calculation:"))
         result2 = num1 - num2
         history.append(f"{num1} - {num2} = {result2}")
         print(num1, "-" , num2, "=", result2)
+        previous = result2
     elif choice == 3: #multiplication
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         num2 = float(input("Enter the second number you want to use for the calculation:"))
         result3 = num1 * num2
         history.append(f"{num1} * {num2} = {result3}")
         print(num1, "x" , num2, "=" ,result3)
+        previous = result3
     elif choice == 4: #division
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         while True:
@@ -89,6 +97,7 @@ while True:
         result4 = num1 / num2
         history.append(f"{num1} / {num2} = {result4}")
         print(num1,"/", num2, "=" ,result4)
+        previous = result4
     elif choice == 5: #modulus
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         while True:
@@ -100,22 +109,26 @@ while True:
         result5 = num1 % num2
         history.append(f"{num1} % {num2} = {result5}")
         print(num1,"%", num2, "=" ,result5)
+        previous = result5
     elif choice == 6: #special  operation
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         num2 = float(input("Enter the second number you want to use for the calculation:"))
         result6 = (num1 + num2) * num2
         history.append(f"{num1} + {num2} * {num2} = {result6}")
         print(num1,"+", num2, "x", num2, "=" ,result6)
+        previous = result6
     elif choice == 7: #Exponentiation
         num1 = float(input("Enter the base number you want to use for the calculation:"))
         num2 = float(input("Enter the exponent you want to use for the calculation:"))
         result7 = num1 ** num2
         print(num1,"**", num2, "=" ,result7)
+        previous = result7
     elif choice == 8: #squaring
         num1 = float(input("Enter the value you want to square:"))
         result8 = num1 ** 2.0
         history.append(f"{num1} ** 2.0 = {result8}")
         print(num1, "**", 2.0, "=", result8)
+        previous =  result8
     elif choice == 9: #manual
         show_manual()
         continue
