@@ -1,4 +1,5 @@
 #by Nova James Warner
+previous = None
 asked_once = False
 history = []
 print("Welcome to my calculator program! To start,")
@@ -11,9 +12,10 @@ print("5. Modulus")
 print("6. Special")
 print("7. Exponentiation")
 print("8. Squaring")
-print("9. Manual")
+print("9. Previous")
 print("10. Calculation history")
 print("11. Exit")
+print("12. Manual")
 print("Use the manual to learn what all the operations do!")
 def input_from_user():
     number = []
@@ -41,7 +43,7 @@ def show_manual():
     print("6. Special: Compute (a + b) * b.")
     print("7. Exponentiation: Putting a number to a power. ")
     print("8. Squaring: Multiply a number by itself.")
-
+    print("9. Previous: Use your previous answer in another calculation")
 while True:
     try:
         choice = int(input("\nEnter the number of your choice of operation or exit using '11'.(1 = addition, 2 = subtraction, etc.): ").strip())
@@ -51,7 +53,7 @@ while True:
     if choice < 1:
         print("Please enter a whole number from 1-11.")
         continue
-    if choice > 11:
+    if choice > 12:
         print("Please enter a whole number from 1-11.")
         continue
     if choice == 1:#addition
@@ -62,12 +64,13 @@ while True:
         #print(num1, "+", num2, "=", result1)
 
         numbers = input_from_user()
-        result1 = numbers[0] + numbers[1]
-        history.append(f"{numbers[0]} + {numbers[1]} = {result1}")
-        print(numbers[0], "+", numbers[1], "=", result1)
-        previous = result1
+        result = numbers[0] + numbers[1]
+        history.append(f"{numbers[0]} + {numbers[1]} = {result}")
+        print(numbers[0], "+", numbers[1], "=", result)
+        previous = result
 
     elif choice == 2:#subtraction
+
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         try:
             if num1 == 0:
@@ -75,18 +78,20 @@ while True:
         except(TypeError, SyntaxError, ValueError):
             print("You have no previous answer! Complete a calculation first to be able to enter your previous answer.")
         num2 = float(input("Enter the second number you want to use for the calculation:"))
-        result2 = num1 - num2
-        history.append(f"{num1} - {num2} = {result2}")
-        print(num1, "-" , num2, "=", result2)
-        previous = result2
+        result = num1 - num2
+        history.append(f"{num1} - {num2} = {result}")
+        print(num1, "-" , num2, "=", result)
+        previous = result
     elif choice == 3: #multiplication
+
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         num2 = float(input("Enter the second number you want to use for the calculation:"))
-        result3 = num1 * num2
-        history.append(f"{num1} * {num2} = {result3}")
-        print(num1, "x" , num2, "=" ,result3)
-        previous = result3
+        result = num1 * num2
+        history.append(f"{num1} * {num2} = {result}")
+        print(num1, "x" , num2, "=" ,result)
+        previous = result
     elif choice == 4: #division
+
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         while True:
             num2 = float(input("Enter the second number you want to use for the calculation:"))
@@ -94,11 +99,12 @@ while True:
                 print("You can't divide by zero.")
                 continue
             break
-        result4 = num1 / num2
-        history.append(f"{num1} / {num2} = {result4}")
-        print(num1,"/", num2, "=" ,result4)
-        previous = result4
+        result = num1 / num2
+        history.append(f"{num1} / {num2} = {result}")
+        print(num1,"/", num2, "=" ,result)
+        previous = result
     elif choice == 5: #modulus
+
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         while True:
             num2 = float(input("Enter the second number you want to use for the calculation:"))
@@ -106,32 +112,98 @@ while True:
                 print("You can't divide by zero.")
                 continue
             break
-        result5 = num1 % num2
-        history.append(f"{num1} % {num2} = {result5}")
-        print(num1,"%", num2, "=" ,result5)
-        previous = result5
+        result = num1 % num2
+        history.append(f"{num1} % {num2} = {result}")
+        print(num1,"%", num2, "=" ,result)
+        previous = result
     elif choice == 6: #special  operation
+
         num1 = float(input("Enter the first number you want to use for the calculation:"))
         num2 = float(input("Enter the second number you want to use for the calculation:"))
-        result6 = (num1 + num2) * num2
-        history.append(f"{num1} + {num2} * {num2} = {result6}")
-        print(num1,"+", num2, "x", num2, "=" ,result6)
-        previous = result6
+        result = (num1 + num2) * num2
+        history.append(f"{num1} + {num2} * {num2} = {result}")
+        print(num1,"+", num2, "x", num2, "=" ,result)
+        previous = result
     elif choice == 7: #Exponentiation
+
         num1 = float(input("Enter the base number you want to use for the calculation:"))
         num2 = float(input("Enter the exponent you want to use for the calculation:"))
-        result7 = num1 ** num2
-        print(num1,"**", num2, "=" ,result7)
-        previous = result7
+        result = num1 ** num2
+        history.append(f"{num1} ** {num2} = {result}")
+        print(num1,"**", num2, "=" ,result)
+        previous = result
     elif choice == 8: #squaring
+
         num1 = float(input("Enter the value you want to square:"))
-        result8 = num1 ** 2.0
-        history.append(f"{num1} ** 2.0 = {result8}")
-        print(num1, "**", 2.0, "=", result8)
-        previous =  result8
-    elif choice == 9: #manual
-        show_manual()
-        continue
+        result = num1 ** 2.0
+        history.append(f"{num1} ** 2.0 = {result}")
+        print(num1, "**", 2.0, "=", result)
+        previous =  result
+
+    elif choice == 9:
+        if previous is not None:
+            num1 = previous
+            choice2 = int((input("Enter the operation you would like to use with your previous answer:")).strip())
+            if choice2 == 1:
+                num2 = float((input("Enter the second number you want to use for your calculation:")).strip())
+                result = num1 + num2
+                print(num1, "+", num2, "=", result)
+                previous = result
+                history.append(f"{num1} + {num2} = {result}")
+            elif choice2 == 2:
+                num2 = float((input("Enter the second number you want to use for your calculation:")).strip())
+                result = num1 - num2
+                print(num1, "-", num2, "=", result)
+                previous = result
+                history.append(f"{num1} - {num2} = {result}")
+            elif choice2 == 3:
+                num2 = float((input("Enter the second number you want to use for your calculation:")).strip())
+                result = num1 * num2
+                print(num1, "x", num2, "=", result)
+                previous = result
+                history.append(f"{num1} x {num2} = {result}")
+            elif choice2 == 4:
+                while True:
+                    num2 = float((input("Enter the second number you want to use for the calculation:")).strip())
+                    if num2 == 0:
+                        print("You can't divide by zero.")
+                        continue
+                    break
+                result = num1 / num2
+                print(num1, "/", num2, "=", result)
+                previous = result
+                history.append(f"{num1} / {num2} = {result}")
+            elif choice2 == 5:
+                while True:
+                    num2 = float((input("Enter the second number you want to use for the calculation:")).strip())
+                    if num2 == 0:
+                        print("You can't divide by zero.")
+                        continue
+                    break
+                result = num1 % num2
+                print(num1, "%", num2, "=", result)
+                previous = result
+                history.append(f"{num1} % {num2} = {result}")
+            elif choice2 == 6:
+                num2 = float((input("Enter the second number you want to use for the calculation:")).strip())
+                result = (num1 + num2) * num2
+                history.append(f"{num1} + {num2} * {num2} = {result}")
+                print(num1,"+", num2, "x", num2, "=" ,result)
+                previous = result
+            elif choice2 == 7:
+                num2 = float((input("Enter the exponent you want to use for the calculation:")).strip())
+                result = num1 ** num2
+                history.append(f"{num1} ** {num2} = {result}")
+                print(num1,"**", num2, "=" ,result)
+                previous = result
+            elif choice2 == 8:
+                result = num1 ** 2.0
+                history.append(f"{num1} ** 2.0 = {result}")
+                print(num1, "**", 2.0, "=", result)
+                previous =  result
+        else:
+            print("You have no previous calculation to work with!")
+            continue
     elif choice == 10: #Calculation history
         print("Here are your previous calculation(s):")
         show_history()
@@ -139,6 +211,9 @@ while True:
     elif choice == 11: #exit
         print("Thank you for using my calculator!")
         break
+    elif choice == 12: #manual
+        show_manual()
+        continue
     if not asked_once:
         play = input("Would you like to use the calculator again? (y/n)").strip().lower()
         asked_once = True
