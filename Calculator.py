@@ -1,6 +1,7 @@
 #by Nova James Warner
 previous = None
 asked_once = False
+not_correct = False
 history = []
 print("Welcome to my calculator program! To start,")
 print("select an operation you want to use:")
@@ -72,11 +73,6 @@ while True:
     elif choice == 2:#subtraction
 
         num1 = float(input("Enter the first number you want to use for the calculation:"))
-        try:
-            if num1 == 0:
-                num1 = previous
-        except(TypeError, SyntaxError, ValueError):
-            print("You have no previous answer! Complete a calculation first to be able to enter your previous answer.")
         num2 = float(input("Enter the second number you want to use for the calculation:"))
         result = num1 - num2
         history.append(f"{num1} - {num2} = {result}")
@@ -141,9 +137,24 @@ while True:
         previous =  result
 
     elif choice == 9:
+        choice2 = 0
         if previous is not None:
             num1 = previous
-            choice2 = int((input("Enter the operation you would like to use with your previous answer:")).strip())
+            while True:
+                try:
+                    choice2 = int((input("Enter the operation you would like to use with your previous answer:")).strip())
+                except(ValueError, TypeError, SyntaxError, RuntimeError):
+                    print("Please enter a valid operation from 1-8.")
+                if choice2 < 1:
+                    print(" Please enter a valid operation from 1-8.")
+                    continue
+                if choice2 > 8:
+                    print(" Please enter a valid operation from 1-8.")
+                    continue
+                else:
+                    break
+
+
             if choice2 == 1:
                 num2 = float((input("Enter the second number you want to use for your calculation:")).strip())
                 result = num1 + num2
