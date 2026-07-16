@@ -33,25 +33,29 @@ def compute3():
         choice3 = int(input("Enter what operation you want to use from 1-3:"))
     except(ValueError, SyntaxError, RuntimeError, TypeError):
         print("Please enter an operation from 1-3.")
-    
+
     num1 = float(input("Enter the first number you want to use for the calculation:"))
     num2 = float(input("Enter the second number you want to use for your calculation:"))
     num3 = float(input("Enter the third number you want to use for your calculation:"))
-
     if choice3 == 1:
         result = num1 + num2 + num3
         history.append(f"{num1} + {num2} + {num3} = {result}")
         print(num1, "+", num2, "+", num3, "=", result)
+        global previous
+        previous = result
 
     elif choice3 == 2:
         result = num1 - num2 - num3
         history.append(f"{num1} - {num2} - {num3} = {result}")
         print(num1, "-", num2, "-", num3, "=", result)
-    
+        previous = result
+
     elif choice3 == 3:
         result = num1 * num2 * num3
         history.append(f"{num1} x {num2} x {num3} = {result}")
         print(num1, "x", num2, "x", num3, "=", result)
+        previous = result
+
 
 def show_history():
     if not history:
